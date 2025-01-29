@@ -9,8 +9,22 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        'primary': '#8B2420',
+        'primary-light': '#A9433F',
+
+        // Secondary Colors
+        'secondary': '#A58986',
+        'secondary-light': '#C4B2AF',
+
+        // Neutral Colors
+        'lavender': '#F9E7E7',
+        'isabelle': '#F0E7E6',
+        'khaki': '#B0A89B',
+        'khaki-dark': '#8A8276',
+
+        // Accent Colors
+        'accent-gold': '#D4AF37',
+        'accent-green': '#6B8E23',
       },
     },
   },
