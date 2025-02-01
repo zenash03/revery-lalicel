@@ -34,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${greatVibes.variable} ${playfairDisplay.variable} ${raleway.variable} antialiased`}
+        className={`${greatVibes.variable} ${playfairDisplay.variable} ${raleway.variable} font-sans antialiased`}
       >
         {children}
       </body>

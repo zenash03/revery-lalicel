@@ -1,6 +1,7 @@
 "use client";
-import { useState } from "react";
-import { account, ID } from "@/app/appwrite";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { account, ID } from "@/lib/appwrite";
 import Head from "next/head";
 
 interface User {
@@ -13,10 +14,36 @@ const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const router = useRouter();
+
+  useEffect(() => {
+    const checkSession = async () => {
+      const session = sessionStorage.getItem("sessionRevery");
+      if (session) {
+        try {
+          const user = await account.get();
+          setLoggedInUser(user);
+          router.push("/admin"); // Redirect to admin page if already logged in
+        } catch (error) {
+          setLoggedInUser(null);
+          sessionStorage.removeItem("sessionRevery");
+        }
+      }
+    };
+    checkSession();
+  }, [router]);
 
   const login = async ({ email, password }: User) => {
-    const session = await account.createEmailPasswordSession(email, password);
-    setLoggedInUser(await account.get());
+    try {
+      const session = await account.createEmailPasswordSession(email, password);
+      sessionStorage.setItem("sessionRevery", JSON.stringify(session));
+      setLoggedInUser(await account.get());
+      router.push("/admin"); // Redirect to admin page after login
+    }
+    catch (error) {
+      console.error("Failed to login", error);
+      throw new Error("Failed to login");
+    }
   };
 
   const register = async () => {
@@ -26,6 +53,7 @@ const LoginPage = () => {
 
   const logout = async () => {
     await account.deleteSession("current");
+    sessionStorage.removeItem("sessionRevery");
     setLoggedInUser(null);
   };
 
