@@ -22,7 +22,7 @@ export default function Topbar() {
   return (
     <div className="bg-white fixed top-0 left-0 w-full z-50 shadow-md py-3">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-        <h1 className="text-xl font-semibold">Luxury Bouquet Store</h1>
+        <h1 className="text-xl font-semibold">Revery Bouquets Store</h1>
         <button
           className="md:hidden text-gray-700 focus:outline-none"
           onClick={() => setIsMenuOpen(!isMenuOpen)}

@@ -44,6 +44,19 @@ export default function Home() {
       return url; // Return the original URL if it's invalid
     }
   };
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    const offset = 70; // Adjust this value as needed
+    const bodyRect = document.body.getBoundingClientRect().top;
+    const elementRect = element?.getBoundingClientRect().top || 0;
+    const elementPosition = elementRect - bodyRect;
+    const offsetPosition = elementPosition - offset;
+  
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: "smooth"
+    });
+  };
 
   return (
     <div className={`font-sans`}>
@@ -69,6 +82,7 @@ export default function Home() {
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             className="relative z-30 bg-french_rose-500 px-6 py-3 rounded-lg text-lg font-semibold"
+            onClick={() => scrollToSection('products')}
           >
             Shop Now
           </motion.button>
