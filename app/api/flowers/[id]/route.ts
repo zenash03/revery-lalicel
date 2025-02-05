@@ -52,11 +52,10 @@ async function updateFlower(id: string, data: { name: string; basePrice: number;
 
 export async function GET(
     req: Request, 
-    context: { params: { id: string } }
+    { params }: { params: Promise<{ id: string}>}
 ) {
     try {
-        const { params } = context;
-        const id = params.id;
+        const { id } = await params;
         const flower = await fetchFlower(id);
 
         return NextResponse.json([flower]);
@@ -69,14 +68,13 @@ export async function GET(
 
 export async function DELETE(
     req: Request, 
-    context: { params: { id: string } }
+    { params }: { params: { id: string}}
 ) {
     try {
-        const { params } = context;
-        const id = params.id;
+        const id = await params.id;
         const response = await deleteFlower(id);
 
-        return NextResponse.json({ message: "Flower deleted" });
+        return NextResponse.json({message: "Flower deleted"});
     } catch (error) {
         return NextResponse.json({
             error: "Failed to delete flower",
@@ -86,16 +84,15 @@ export async function DELETE(
 
 export async function PUT(
     req: Request, 
-    context: { params: { id: string } }
+    { params }: { params: { id: string}}
 ) {
     try {
-        const { params } = context;
-        const id = params.id;
+        const id = await params.id;
         const { name, basePrice, colors, size, image_url } = await req.json();
         const data = { name, basePrice, colors, size, image_url };
         const response = await updateFlower(id, data);
 
-        return NextResponse.json({ message: "Flower updated" });
+        return NextResponse.json({message: "Flower updated"});
     } catch (error) {
         return NextResponse.json({
             error: "Failed to update flower",
