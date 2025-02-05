@@ -68,10 +68,10 @@ export async function GET(
 
 export async function DELETE(
     req: Request, 
-    { params }: { params: { id: string}}
+    { params }: { params: Promise<{ id: string}>}
 ) {
     try {
-        const id = await params.id;
+        const { id } = await params;
         const response = await deleteFlower(id);
 
         return NextResponse.json({message: "Flower deleted"});
@@ -84,10 +84,10 @@ export async function DELETE(
 
 export async function PUT(
     req: Request, 
-    { params }: { params: { id: string}}
+    { params }: { params: Promise<{ id: string}>}
 ) {
     try {
-        const id = await params.id;
+        const { id } = await params;
         const { name, basePrice, colors, size, image_url } = await req.json();
         const data = { name, basePrice, colors, size, image_url };
         const response = await updateFlower(id, data);

@@ -69,10 +69,10 @@ export async function GET(
 
 export async function DELETE(
     req: Request, 
-    { params }: { params: { id: string}}
+    { params }: { params: Promise<{ id: string}> }
 ) {
     try {
-        const id = params.id;
+        const { id } = await params;
         const response = await deleteColor(id);
         return NextResponse.json({message: "Color deleted"});
     }
@@ -85,10 +85,10 @@ export async function DELETE(
 
 export async function PUT(
     req: Request, 
-    { params }: { params: { id: string}}
+    { params }: { params: Promise<{ id: string}> }
 ) {
     try {
-        const id = params.id;
+        const { id } = await params;
         const { name, hexColor } = await req.json();
         const data = {name, hexColor};
         const response = await updateColor(id, data);
