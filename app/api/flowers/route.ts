@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 const database = new Databases(client);
 
-async function createFlowers(data: {name: string, basePrice: number, colors: [string], size: string, image_url: string}) {
+async function createFlowers(data: {name: string, basePrice: number, colors: [string], stems: number, image_url: string}) {
     try {
         const response = await database.createDocument(
             process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID as string,
@@ -14,7 +14,7 @@ async function createFlowers(data: {name: string, basePrice: number, colors: [st
                 name: data.name,
                 basePrice: data.basePrice,
                 colors: data.colors,
-                size: data.size,
+                stems: data.stems,
                 image_url: data.image_url
             }
         );
@@ -43,8 +43,8 @@ async function fetchFlowers() {
 
 export async function POST(req: Request) {
     try {
-        const { name, basePrice, colors, size, image_url } = await req.json();
-        const data = { name, basePrice, colors, size, image_url };
+        const { name, basePrice, colors, stems, image_url } = await req.json();
+        const data = { name, basePrice, colors, stems, image_url };
         const response = await createFlowers(data);
 
         return NextResponse.json(response);

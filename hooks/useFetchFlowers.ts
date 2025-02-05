@@ -35,7 +35,7 @@ export function useFetchFlower(id: string) {
     const fetchFlowers = async () => {
         setIsFetchingFlower(true);
         try {
-            const response = await fetch('/api/flowers');
+            const response = await fetch(`/api/flowers/${id}`);
             if (!response.ok) {
                 throw new Error('Failed to fetch flowers');
             }

@@ -9,8 +9,8 @@ export interface FlowerProps {
     name: string;
     basePrice: number;
     colors: [ColorProps];
-    size: string;
-    image_url: string;
+    stems: number;
+    image_url: [string];
 }
 
 // ...existing code...

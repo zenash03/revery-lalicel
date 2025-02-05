@@ -25,7 +25,7 @@ async function fetchColor() {
     try {
       const response = await database.listDocuments(
         process.env.NEXT_PUBLIC_APPWRITE_DATABASE_ID as string,
-        "679a73e8000ddd6fc421",
+        process.env.NEXT_PUBLIC_APPWRITE_COLLECTION_COLOR_ID as string,
         [Query.orderDesc("$createdAt")]
     );
   

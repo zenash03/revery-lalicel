@@ -58,7 +58,7 @@ export async function GET(
         const id = params.id;
         const flower = await fetchFlower(id);
 
-        return NextResponse.json({flower});
+        return NextResponse.json([flower]);
     } catch (error) {
         return NextResponse.json({
             error: "Failed to fetch flower",
