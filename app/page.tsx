@@ -158,11 +158,11 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 min-h-screen bg-pink-50">
+      <section id="contact" className="py-20 min-h-screen/2 bg-pink-50">
         <div className="container mx-auto px-4">
           <h2 className={`font-playfair text-4xl text-center mb-8 font-medium`}>Find Us on Social Media</h2>
           <div className="flex flex-col md:flex-row justify-center items-center gap-8">
-            <a href="https://www.tiktok.com/@yourprofile" target="_blank" rel="noopener noreferrer" className="flex items-center text-gray-600 hover:text-gray-900">
+            <a href="https://www.tiktok.com/@reveryind" target="_blank" rel="noopener noreferrer" className="flex items-center text-gray-600 hover:text-gray-900">
               <img src="/icons/tiktok.svg" alt="TikTok" className="w-8 h-8 mr-2" />
               <span className="font-sans text-french_rose-500 font-semibold">TikTok</span>
             </a>
