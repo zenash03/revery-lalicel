@@ -73,7 +73,7 @@ export default function Home() {
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
-        className="relative z-10 h-screen flex flex-col items-center justify-center bg-baker-miller_pink-500 text-white text-center pt-16 bg-cover bg-center bg-no-repeat bg-[url('https://cloud.appwrite.io/v1/storage/buckets/679dd68b002f6d3e4e1d/files/67a367d00039a1dd2213/view?project=679dcf2000139016ae39')] bg-fixed after:w-full after:h-full after:absolute after:top-0 after:left-0 after:bg-black after:opacity-45" 
+        className="relative z-10 h-screen flex flex-col items-center justify-center bg-baker-miller_pink-500 text-white text-center pt-16 bg-cover bg-center bg-no-repeat bg-[url('https://cloud.appwrite.io/v1/storage/buckets/679dd68b002f6d3e4e1d/files/67a4b7740018f805b58f/view?project=679dcf2000139016ae39')] bg-fixed after:w-full after:h-full after:absolute after:top-0 after:left-0 after:bg-black after:opacity-45" 
       >
         <div className="relative z-20">
           <h1 className={`font-great-vibes text-6xl mb-4`}>Revery Bouquets</h1>
