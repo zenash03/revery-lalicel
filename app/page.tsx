@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Head from "next/head";
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFetchFlowers } from "@/hooks/useFetchFlowers";
 import { useRouter } from 'next/navigation';
 import Topbar from "@/components/Topbar";
@@ -30,6 +30,20 @@ export default function Home() {
   const { flowers, isFetchingFlower } = useFetchFlowers();
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [stars, setStars] = useState<
+    { id: number; x: number; y: number; size: number }[]
+  >([]);
+
+  useEffect(() => {
+    const numStars = 30; // Adjust for more or fewer stars
+    const generatedStars = Array.from({ length: numStars }, (_, i) => ({
+      id: i,
+      x: Math.random() * 100, // Random X position (percentage)
+      y: Math.random() * 100, // Random Y position (percentage)
+      size: Math.random() * 4 + 2, // Random size (between 2px and 6px)
+    }));
+    setStars(generatedStars);
+  }, []);
 
   const formatCurrency = (price: any) => {
     return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(price);
@@ -67,13 +81,64 @@ export default function Home() {
 
       <Topbar />
 
+      <motion.section
+      id="hero"
+      initial={{ opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1 }}
+      className="relative z-10 h-screen flex flex-col items-center justify-center bg-baker-miller_pink-500 text-white text-center pt-16 bg-cover bg-center bg-no-repeat"
+    >
+      {/* Star Sprinkle Effect */}
+      <div className="absolute inset-0 overflow-hidden">
+        {stars.map((star) => (
+          <motion.div
+            key={star.id}
+            initial={{ opacity: 0 }}
+            animate={{
+              opacity: [0, 1, 0],
+              scale: [0.8, 1.2, 0.8],
+              y: [0, -5, 0], // Floating effect
+            }}
+            transition={{
+              duration: Math.random() * 3 + 2, // Varying duration
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="absolute bg-white rounded-full"
+            style={{
+              width: `${star.size}px`,
+              height: `${star.size}px`,
+              left: `${star.x}%`,
+              top: `${star.y}%`,
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="relative z-20">
+        <h1 className="font-great-vibes text-6xl mb-4">Revery Bouquets</h1>
+        <p className="font-playfair text-2xl mb-8">
+          Elegant arrangements for every occasion
+        </p>
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          className="relative z-30 bg-french_rose-500 px-6 py-3 rounded-lg text-lg font-semibold"
+          onClick={() => scrollToSection("products")}
+        >
+          Shop Now
+        </motion.button>
+      </div>
+    </motion.section>
       {/* Hero Section */}
+      {/* 
       <motion.section
         id="hero"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
-        className="relative z-10 h-screen flex flex-col items-center justify-center bg-baker-miller_pink-500 text-white text-center pt-16 bg-cover bg-center bg-no-repeat bg-[url('https://cloud.appwrite.io/v1/storage/buckets/679dd68b002f6d3e4e1d/files/67a4b7740018f805b58f/view?project=679dcf2000139016ae39')] bg-fixed after:w-full after:h-full after:absolute after:top-0 after:left-0 after:bg-black after:opacity-45" 
+        className="relative z-10 h-screen flex flex-col items-center justify-center bg-baker-miller_pink-500 text-white text-center pt-16 bg-cover bg-center bg-no-repeat" 
+        // className="relative z-10 h-screen flex flex-col items-center justify-center bg-baker-miller_pink-500 text-white text-center pt-16 bg-cover bg-center bg-no-repeat bg-[url('https://cloud.appwrite.io/v1/storage/buckets/679dd68b002f6d3e4e1d/files/67a4b7740018f805b58f/view?project=679dcf2000139016ae39')] bg-fixed after:w-full after:h-full after:absolute after:top-0 after:left-0 after:bg-black after:opacity-45" 
       >
         <div className="relative z-20">
           <h1 className={`font-great-vibes text-6xl mb-4`}>Revery Bouquets</h1>
@@ -88,6 +153,9 @@ export default function Home() {
           </motion.button>
         </div>
       </motion.section>
+      
+      
+      */}
 
       {/* Products Section */}
       <section id="products" className="py-20 bg-pink-50 min-h-screen flex flex-col items-center">  
