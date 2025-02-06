@@ -1,10 +1,9 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useFetchFlower } from "@/hooks/useFetchFlowers";
 import { motion } from "framer-motion";
 import Topbar from "@/components/Topbar";
-import { Suspense } from "react";
 
 type Props = {};
 

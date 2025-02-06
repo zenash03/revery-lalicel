@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Great_Vibes as GreatVibes, Playfair_Display as PlayfairDisplay, Raleway as Raleway } from "next/font/google";
 import "./globals.css";
+import { Suspense } from "react";
+import Loading from "./loading";
+
 
 const greatVibes = GreatVibes({
   variable: "--font-great-vibes",
@@ -40,7 +43,9 @@ export default function RootLayout({
       <body
         className={`${greatVibes.variable} ${playfairDisplay.variable} ${raleway.variable} font-sans antialiased`}
       >
-        {children}
+        <Suspense fallback={<Loading />}>
+          {children}
+        </Suspense>
       </body>
     </html>
   );
